@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speaking Exam App</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #f1fff4);
+  color: #1b1b1b;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.headerBox {
+  background: white;
+  border-radius: 22px;
+  padding: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  border: 2px solid #2e7d32;
+}
+
+.timer {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #1b5e20;
+}
+
+.card {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 22px;
+  margin-bottom: 18px;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  border: 2px solid #c8e6c9;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+.topic {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: 14px;
+  background: #dcedc8;
+  font-weight: 700;
+  color: #1b5e20;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.1rem;
+  border-radius: 999px;
+  border: none;
+  background: #2e7d32;
+  color: white;
+  margin-top: 10px;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+button:hover {
+  background: #256428;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+</style>
+</head>
+
+<body>
+
+<div class="headerBox">
+  <h1>Speaking Exam App</h1>
+  <div class="timer" id="timer">04:00</div>
+</div>
+
+<div class="card">
+In this part, I’m going to give you a topic to talk about.<br><br>
+Ask each other questions in order to find out about
+<div id="t1" class="topic"></div><br>
+Keep the conversation going.
+</div>
+
+<div class="card">
+Here is another topic for you.<br><br>
+Talk about
+<div id="t2" class="topic"></div>
+</div>
+
+<button onclick="startExam()">Start Exam</button>
+<button onclick="showSecondTopic()">Show Second Topic</button>
+<button onclick="resetExam()">Reset</button>
+
+<script>
+const topics = [
+"your dream job",
+"your dream vacation",
+"your hobbies and free time",
+"social media",
+"your plans for the future",
+"role models",
+"school life",
+"something you are grateful for",
+"your family and friends",
+"a perfect weekend",
+"special days",
+"a healthy lifestyle",
+"sports",
+"your daily chores",
+"your daily habits",
+"food",
+"famous people",
+"films and series",
+"places you have visited",
+"a childhood memory"
+];
+
+let timer;
+let timeLeft = 240;
+let currentTopic1 = "";
+
+function updateTimer() {
+  let min = Math.floor(timeLeft / 60);
+  let sec = timeLeft % 60;
+  document.getElementById("timer").textContent =
+    String(min).padStart(2,'0') + ":" + String(sec).padStart(2,'0');
+
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    document.getElementById("timer").textContent = "TIME UP";
+  } else {
+    timeLeft--;
+  }
+}
+
+function startTimer() {
+  clearInterval(timer);
+  timeLeft = 240;
+  timer = setInterval(updateTimer, 1000);
+}
+
+function generateTopic1() {
+  currentTopic1 = topics[Math.floor(Math.random() * topics.length)];
+  document.getElementById("t1").textContent = currentTopic1;
+  document.getElementById("t2").textContent = "";
+}
+
+function showSecondTopic() {
+  let filtered = topics.filter(t => t !== currentTopic1);
+  let topic2 = filtered[Math.floor(Math.random() * filtered.length)];
+  document.getElementById("t2").textContent = topic2;
+}
+
+function startExam() {
+  generateTopic1();
+  startTimer();
+}
+
+function resetExam() {
+  clearInterval(timer);
+  timeLeft = 240;
+  document.getElementById("timer").textContent = "04:00";
+  document.getElementById("t1").textContent = "";
+  document.getElementById("t2").textContent = "";
+  currentTopic1 = "";
+}
+
+updateTimer();
+</script>
+
+</body>
+</html>
+```
