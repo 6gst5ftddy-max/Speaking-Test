@@ -101,6 +101,7 @@ button.secondary {
   color: #1b5e20;
   z-index: 9999;
   animation: fadeInScreen 0.8s ease forwards;
+  cursor: pointer;
 }
 
 @keyframes fadeInScreen {
@@ -141,9 +142,9 @@ Talk about
 <div id="t2" class="topic"></div>
 </div>
 
-<button class="secondary" onclick="resetExam()">New Test</button>
+<button class="secondary" onclick="resetExam()">Next Test</button>
 
-<div id="endScreen" class="endScreen">
+<div id="endScreen" class="endScreen" onclick="dismissEnd()">
   <div id="endMessage">Good Job! 👏</div>
 </div>
 
@@ -168,6 +169,7 @@ const messages = [
 let timer;
 let timeLeft = 240;
 let currentTopic1 = "";
+let endTimeout;
 
 function updateTimer() {
   let min = Math.floor(timeLeft / 60);
@@ -209,6 +211,7 @@ function startExam() {
 
 function resetExam() {
   clearInterval(timer);
+  clearTimeout(endTimeout);
   timeLeft = 240;
   document.getElementById("timer").textContent = "04:00";
   document.getElementById("t1").textContent = "";
@@ -221,15 +224,18 @@ function showEndScreen() {
   const screen = document.getElementById("endScreen");
   const msg = document.getElementById("endMessage");
 
-  // pick ONE message per full test run
   const randomIndex = Math.floor(Math.random() * messages.length);
   msg.textContent = messages[randomIndex];
 
   screen.style.display = "flex";
 
-  setTimeout(() => {
+  endTimeout = setTimeout(() => {
     resetExam();
   }, 30000);
+}
+
+function dismissEnd() {
+  resetExam();
 }
 
 updateTimer();
