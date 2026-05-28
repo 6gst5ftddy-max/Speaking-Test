@@ -6,122 +6,162 @@
 <title>Speaking Exam App</title>
 
 <style>
+:root{
+  --bg1:#f5f7ff;
+  --bg2:#e9fdf1;
+  --card:rgba(255,255,255,0.75);
+  --stroke:rgba(0,0,0,0.08);
+  --green:#34c759;
+  --greenDark:#28a745;
+  --gray:#8e8e93;
+}
+
 body {
   margin: 0;
-  padding: 24px;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #e8f5e9, #f1fff4);
-  color: #1b1b1b;
+  padding: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Arial, sans-serif;
+  background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+  color: #1c1c1e;
+  overflow-x: hidden;
 }
 
-h1 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin: 0;
+/* FLOATING ORBS (Apple-like background) */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(25px);
+  opacity: 0.35;
+  animation: float 10s ease-in-out infinite;
+  z-index: 0;
 }
 
+.orb1 { width: 220px; height: 220px; background: #34c759; top: -50px; left: -60px; }
+.orb2 { width: 180px; height: 180px; background: #0a84ff; bottom: -60px; right: -40px; animation-delay: 2s; }
+.orb3 { width: 140px; height: 140px; background: #ffcc00; top: 40%; left: 70%; animation-delay: 4s; }
+
+@keyframes float {
+  0%,100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(20px) scale(1.05); }
+}
+
+/* HEADER CARD */
 .headerBox {
-  background: white;
-  border-radius: 22px;
+  position: relative;
+  z-index: 2;
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--stroke);
+  border-radius: 26px;
   padding: 18px;
-  margin-bottom: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  border: 2px solid #2e7d32;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 .timer {
   text-align: center;
   font-size: 2.6rem;
-  font-weight: bold;
-  margin-top: 8px;
-  color: #1b5e20;
+  font-weight: 600;
+  color: #1c7c3a;
+  margin-top: 6px;
 }
 
+/* CARDS */
 .card {
-  background: #ffffff;
+  position: relative;
+  z-index: 2;
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--stroke);
+  border-radius: 26px;
   padding: 22px;
-  border-radius: 22px;
-  margin-bottom: 18px;
-  font-size: 1.25rem;
-  line-height: 1.7;
-  border: 2px solid #c8e6c9;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
 }
 
 .topic {
   display: inline-block;
-  margin-top: 8px;
-  padding: 6px 12px;
+  margin-top: 10px;
+  padding: 6px 14px;
   border-radius: 14px;
-  background: #dcedc8;
-  font-weight: 700;
-  color: #1b5e20;
+  background: rgba(52,199,89,0.15);
+  font-weight: 600;
+  color: #1c7c3a;
   animation: fadeIn 0.4s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* BUTTONS (Apple style) */
 button {
   width: 100%;
-  padding: 16px;
-  font-size: 1.1rem;
-  border-radius: 999px;
-  border: none;
-  background: #2e7d32;
+  padding: 15px;
+  font-size: 1.05rem;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(52,199,89,0.9);
   color: white;
-  margin-top: 10px;
-  margin-bottom: 18px;
   font-weight: 600;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  margin-top: 10px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: all 0.15s ease;
 }
 
-button:hover { background: #256428; }
+button:hover { transform: translateY(-1px); background: #2fb351; }
 button:active { transform: scale(0.98); }
 
 button.secondary {
-  background: #9e9e9e;
+  background: rgba(142,142,147,0.25);
+  color: #1c1c1e;
 }
 
+/* END SCREEN */
 .endScreen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.95);
+  inset: 0;
   display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: 3rem;
-  font-weight: bold;
-  color: #1b5e20;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
   z-index: 9999;
-  animation: fadeInScreen 0.8s ease forwards;
-  cursor: pointer;
+  text-align: center;
 }
 
-@keyframes fadeInScreen {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.endMessage {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1c7c3a;
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 </style>
 </head>
 
 <body>
 
+<!-- BACKGROUND ORBS -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
 <div class="headerBox">
-  <h1>
-    <span style="font-size: 1.55rem; font-weight: 700; letter-spacing: 0.5px;">
-      SPEAKING TEST&nbsp;&nbsp;&nbsp; <span style="color: gray;">PART 1</span>
-    </span><br>
-    <span style="font-size: 1.15rem; font-weight: 700;">
-      General conversation
-    </span>
+  <h1 style="text-align:center; margin:0; font-weight:700;">
+    SPEAKING TEST <span style="color:#8e8e93;">PART 1</span>
   </h1>
+  <div style="text-align:center; font-weight:600; margin-top:4px;">
+    General conversation
+  </div>
   <div class="timer" id="timer">04:00</div>
 </div>
 
@@ -142,10 +182,10 @@ Talk about
 <div id="t2" class="topic"></div>
 </div>
 
-<button class="secondary" onclick="resetExam()">New Test</button>
+<button class="secondary" onclick="resetExam()">Next Test</button>
 
 <div id="endScreen" class="endScreen" onclick="dismissEnd()">
-  <div id="endMessage">Good Job! 👏</div>
+  <div class="endMessage" id="endMessage">Good Job! 👏</div>
 </div>
 
 <script>
@@ -158,85 +198,53 @@ const topics = [
 ];
 
 const messages = [
-"Good Job! 👏",
-"Well done! 🌟",
-"Excellent speaking! 💬",
-"Brilliant work! 🚀",
-"Amazing effort! 🎯",
-"Keep it up! 💪"
+"Good Job! 👏","Well done! 🌟","Excellent speaking! 💬","Brilliant work! 🚀","Amazing effort! 🎯"
 ];
 
 let timer;
 let timeLeft = 240;
 let currentTopic1 = "";
-let endTimeout;
 
-function updateTimer() {
-  let min = Math.floor(timeLeft / 60);
-  let sec = timeLeft % 60;
-  document.getElementById("timer").textContent =
-    String(min).padStart(2,'0') + ":" + String(sec).padStart(2,'0');
-
-  if (timeLeft <= 0) {
-    clearInterval(timer);
-    document.getElementById("timer").textContent = "TIME UP";
-    showEndScreen();
-  } else {
-    timeLeft--;
-  }
+function updateTimer(){
+  let m = Math.floor(timeLeft/60);
+  let s = timeLeft%60;
+  document.getElementById("timer").textContent = String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+  if(timeLeft<=0){ clearInterval(timer); showEnd(); }
+  else timeLeft--;
 }
 
-function startTimer() {
+function startTimer(){ clearInterval(timer); timeLeft=240; timer=setInterval(updateTimer,1000); }
+
+function generateTopic1(){
+  currentTopic1 = topics[Math.floor(Math.random()*topics.length)];
+  document.getElementById("t1").textContent=currentTopic1;
+  document.getElementById("t2").textContent="";
+}
+
+function showSecondTopic(){
+  let t = topics.filter(x=>x!==currentTopic1);
+  document.getElementById("t2").textContent = t[Math.floor(Math.random()*t.length)];
+}
+
+function startExam(){ generateTopic1(); startTimer(); }
+
+function resetExam(){
   clearInterval(timer);
-  timeLeft = 240;
-  timer = setInterval(updateTimer, 1000);
+  timeLeft=240;
+  document.getElementById("timer").textContent="04:00";
+  document.getElementById("t1").textContent="";
+  document.getElementById("t2").textContent="";
+  document.getElementById("endScreen").style.display="none";
 }
 
-function generateTopic1() {
-  currentTopic1 = topics[Math.floor(Math.random() * topics.length)];
-  document.getElementById("t1").textContent = currentTopic1;
-  document.getElementById("t2").textContent = "";
+function showEnd(){
+  const msg = messages[Math.floor(Math.random()*messages.length)];
+  document.getElementById("endMessage").textContent = msg;
+  document.getElementById("endScreen").style.display="flex";
+  setTimeout(resetExam,30000);
 }
 
-function showSecondTopic() {
-  let filtered = topics.filter(t => t !== currentTopic1);
-  let topic2 = filtered[Math.floor(Math.random() * filtered.length)];
-  document.getElementById("t2").textContent = topic2;
-}
-
-function startExam() {
-  generateTopic1();
-  startTimer();
-}
-
-function resetExam() {
-  clearInterval(timer);
-  clearTimeout(endTimeout);
-  timeLeft = 240;
-  document.getElementById("timer").textContent = "04:00";
-  document.getElementById("t1").textContent = "";
-  document.getElementById("t2").textContent = "";
-  currentTopic1 = "";
-  document.getElementById("endScreen").style.display = "none";
-}
-
-function showEndScreen() {
-  const screen = document.getElementById("endScreen");
-  const msg = document.getElementById("endMessage");
-
-  const randomIndex = Math.floor(Math.random() * messages.length);
-  msg.textContent = messages[randomIndex];
-
-  screen.style.display = "flex";
-
-  endTimeout = setTimeout(() => {
-    resetExam();
-  }, 30000);
-}
-
-function dismissEnd() {
-  resetExam();
-}
+function dismissEnd(){ resetExam(); }
 
 updateTimer();
 </script>
