@@ -199,5 +199,56 @@ const topics = [
 ];
 
 const messages = [
-"Good Job! 👏","
-```
+"Good Job! 👏","Well done! 🌟","Excellent speaking! 💬","Brilliant work! 🚀","Amazing effort! 🎯"
+];
+
+let timer;
+let timeLeft = 240;
+let currentTopic1 = "";
+
+function updateTimer(){
+  let m = Math.floor(timeLeft/60);
+  let s = timeLeft%60;
+  document.getElementById("timer").textContent = String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+  if(timeLeft<=0){ clearInterval(timer); showEnd(); }
+  else timeLeft--;
+}
+
+function startTimer(){ clearInterval(timer); timeLeft=240; timer=setInterval(updateTimer,1000); }
+
+function generateTopic1(){
+  currentTopic1 = topics[Math.floor(Math.random()*topics.length)];
+  document.getElementById("t1").textContent=currentTopic1;
+  document.getElementById("t2").textContent="";
+}
+
+function showSecondTopic(){
+  let t = topics.filter(x=>x!==currentTopic1);
+  document.getElementById("t2").textContent = t[Math.floor(Math.random()*t.length)];
+}
+
+function startExam(){ generateTopic1(); startTimer(); }
+
+function resetExam(){
+  clearInterval(timer);
+  timeLeft=240;
+  document.getElementById("timer").textContent="04:00";
+  document.getElementById("t1").textContent="";
+  document.getElementById("t2").textContent="";
+  document.getElementById("endScreen").style.display="none";
+}
+
+function showEnd(){
+  const msg = messages[Math.floor(Math.random()*messages.length)];
+  document.getElementById("endMessage").textContent = msg;
+  document.getElementById("endScreen").style.display="flex";
+  setTimeout(resetExam,30000);
+}
+
+function dismissEnd(){ resetExam(); }
+
+updateTimer();
+</script>
+
+</body>
+</html>
