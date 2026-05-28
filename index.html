@@ -7,8 +7,9 @@
 
 <style>
 :root{
-  --bg1:#f5f7ff;
+  --bg1:#f3fff6;
   --bg2:#e9fdf1;
+  --bg3:#dff7e6;
   --card:rgba(255,255,255,0.75);
   --stroke:rgba(0,0,0,0.08);
   --green:#34c759;
@@ -20,7 +21,7 @@ body {
   margin: 0;
   padding: 22px;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Arial, sans-serif;
-  background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+  background: linear-gradient(180deg, var(--bg1), var(--bg2), var(--bg3));
   color: #1c1c1e;
   overflow-x: hidden;
 }
@@ -36,8 +37,8 @@ body {
 }
 
 .orb1 { width: 220px; height: 220px; background: #34c759; top: -50px; left: -60px; }
-.orb2 { width: 180px; height: 180px; background: #0a84ff; bottom: -60px; right: -40px; animation-delay: 2s; }
-.orb3 { width: 140px; height: 140px; background: #ffcc00; top: 40%; left: 70%; animation-delay: 4s; }
+.orb2 { width: 180px; height: 180px; background: #2fb351; bottom: -60px; right: -40px; animation-delay: 2s; }
+.orb3 { width: 160px; height: 160px; background: #6ee7a2; top: 40%; left: 70%; animation-delay: 4s; }
 
 @keyframes float {
   0%,100% { transform: translateY(0px) scale(1); }
@@ -128,8 +129,8 @@ button.secondary {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(22px);
   z-index: 9999;
   text-align: center;
 }
@@ -150,7 +151,7 @@ button.secondary {
 
 <body>
 
-<!-- BACKGROUND ORBS -->
+<!-- BACKGROUND ORBS (ALL GREEN VARIANTS) -->
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
@@ -198,56 +199,5 @@ const topics = [
 ];
 
 const messages = [
-"Good Job! 👏","Well done! 🌟","Excellent speaking! 💬","Brilliant work! 🚀","Amazing effort! 🎯"
-];
-
-let timer;
-let timeLeft = 240;
-let currentTopic1 = "";
-
-function updateTimer(){
-  let m = Math.floor(timeLeft/60);
-  let s = timeLeft%60;
-  document.getElementById("timer").textContent = String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-  if(timeLeft<=0){ clearInterval(timer); showEnd(); }
-  else timeLeft--;
-}
-
-function startTimer(){ clearInterval(timer); timeLeft=240; timer=setInterval(updateTimer,1000); }
-
-function generateTopic1(){
-  currentTopic1 = topics[Math.floor(Math.random()*topics.length)];
-  document.getElementById("t1").textContent=currentTopic1;
-  document.getElementById("t2").textContent="";
-}
-
-function showSecondTopic(){
-  let t = topics.filter(x=>x!==currentTopic1);
-  document.getElementById("t2").textContent = t[Math.floor(Math.random()*t.length)];
-}
-
-function startExam(){ generateTopic1(); startTimer(); }
-
-function resetExam(){
-  clearInterval(timer);
-  timeLeft=240;
-  document.getElementById("timer").textContent="04:00";
-  document.getElementById("t1").textContent="";
-  document.getElementById("t2").textContent="";
-  document.getElementById("endScreen").style.display="none";
-}
-
-function showEnd(){
-  const msg = messages[Math.floor(Math.random()*messages.length)];
-  document.getElementById("endMessage").textContent = msg;
-  document.getElementById("endScreen").style.display="flex";
-  setTimeout(resetExam,30000);
-}
-
-function dismissEnd(){ resetExam(); }
-
-updateTimer();
-</script>
-
-</body>
-</html>
+"Good Job! 👏","
+```
