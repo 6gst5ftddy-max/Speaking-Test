@@ -7,45 +7,42 @@
 
 <style>
 :root{
-  --bg1:#f3fff6;
-  --bg2:#e9fdf1;
-  --bg3:#dff7e6;
-  --card:rgba(255,255,255,0.75);
+  --bg1:#f0fff4;
+  --bg2:#d8f5e1;
+  --bg3:#bfe8cc;
+  --card:rgba(255,255,255,0.78);
   --stroke:rgba(0,0,0,0.08);
   --green:#34c759;
-  --greenDark:#28a745;
-  --gray:#8e8e93;
 }
 
 body {
   margin: 0;
   padding: 22px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Arial, sans-serif;
-  background: linear-gradient(180deg, var(--bg1), var(--bg2), var(--bg3));
-  color: #1c1c1e;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial;
+  min-height: 100vh;
   overflow-x: hidden;
+  background: linear-gradient(180deg, #e9fff0 0%, #c9f2d6 45%, #7fd39a 100%);
+  color: #1c1c1e;
 }
 
-/* FLOATING ORBS (Apple-like background) */
 .orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(25px);
-  opacity: 0.35;
+  filter: blur(28px);
+  opacity: 0.28;
   animation: float 10s ease-in-out infinite;
   z-index: 0;
 }
 
-.orb1 { width: 220px; height: 220px; background: #34c759; top: -50px; left: -60px; }
-.orb2 { width: 180px; height: 180px; background: #2fb351; bottom: -60px; right: -40px; animation-delay: 2s; }
-.orb3 { width: 160px; height: 160px; background: #6ee7a2; top: 40%; left: 70%; animation-delay: 4s; }
+.orb1 { width: 240px; height: 240px; background: #34c759; top: -60px; left: -70px; }
+.orb2 { width: 200px; height: 200px; background: #34c759; bottom: -80px; right: -60px; animation-delay: 2s; }
+.orb3 { width: 180px; height: 180px; background: #34c759; top: 35%; left: 65%; animation-delay: 4s; }
 
 @keyframes float {
   0%,100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(20px) scale(1.05); }
+  50% { transform: translateY(18px) scale(1.06); }
 }
 
-/* HEADER CARD */
 .headerBox {
   position: relative;
   z-index: 2;
@@ -63,10 +60,8 @@ body {
   font-size: 2.6rem;
   font-weight: 600;
   color: #1c7c3a;
-  margin-top: 6px;
 }
 
-/* CARDS */
 .card {
   position: relative;
   z-index: 2;
@@ -86,42 +81,29 @@ body {
   margin-top: 10px;
   padding: 6px 14px;
   border-radius: 14px;
-  background: rgba(52,199,89,0.15);
+  background: rgba(52,199,89,0.18);
   font-weight: 600;
   color: #1c7c3a;
-  animation: fadeIn 0.4s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* BUTTONS (Apple style) */
 button {
   width: 100%;
   padding: 15px;
-  font-size: 1.05rem;
   border-radius: 18px;
   border: 1px solid rgba(0,0,0,0.1);
-  background: rgba(52,199,89,0.9);
+  background: rgba(52,199,89,0.92);
   color: white;
   font-weight: 600;
   margin-top: 10px;
   margin-bottom: 14px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  transition: all 0.15s ease;
 }
 
-button:hover { transform: translateY(-1px); background: #2fb351; }
-button:active { transform: scale(0.98); }
-
 button.secondary {
-  background: rgba(142,142,147,0.25);
+  background: rgba(255,255,255,0.25);
   color: #1c1c1e;
 }
 
-/* END SCREEN */
 .endScreen {
   position: fixed;
   inset: 0;
@@ -129,38 +111,30 @@ button.secondary {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.55);
   backdrop-filter: blur(22px);
   z-index: 9999;
-  text-align: center;
 }
 
 .endMessage {
   font-size: 2.8rem;
   font-weight: 700;
   color: #1c7c3a;
-  animation: pop 0.4s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND ORBS (ALL GREEN VARIANTS) -->
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
 <div class="headerBox">
-  <h1 style="text-align:center; margin:0; font-weight:700;">
+  <h1 style="text-align:center;margin:0;font-weight:700;">
     SPEAKING TEST <span style="color:#8e8e93;">PART 1</span>
   </h1>
-  <div style="text-align:center; font-weight:600; margin-top:4px;">
+  <div style="text-align:center;font-weight:600;margin-top:4px;">
     General conversation
   </div>
   <div class="timer" id="timer">04:00</div>
@@ -170,9 +144,8 @@ button.secondary {
 
 <div class="card">
 In this part, I’m going to give you a <strong>topic</strong> to talk about.<br><br>
-Ask each other questions in order to find out about
-<div id="t1" class="topic"></div><br>
-Keep the conversation going.
+Ask each other questions about
+<div id="t1" class="topic"></div>
 </div>
 
 <button onclick="showSecondTopic()">Show Second Topic</button>
@@ -190,44 +163,35 @@ Talk about
 </div>
 
 <script>
-const topics = [
-"your dream job","your dream vacation","your hobbies and free time","social media",
-"your plans for the future","role models","school life","something you are grateful for",
-"your family and friends","a perfect weekend","special days","a healthy lifestyle",
-"sports","your daily chores","your daily habits","food","famous people",
-"films and series","places you have visited","a childhood memory"
-];
+const topics=["your dream job","your dream vacation","your hobbies and free time","social media","your plans for the future","role models","school life","something you are grateful for","your family and friends","a perfect weekend","special days","a healthy lifestyle","sports","your daily chores","your daily habits","food","famous people","films and series","places you have visited","a childhood memory"];
 
-const messages = [
-"Good Job! 👏","Well done! 🌟","Excellent speaking! 💬","Brilliant work! 🚀","Amazing effort! 🎯"
-];
+const messages=["Good Job! 👏","Well done! 🌟","Excellent speaking! 💬","Brilliant work! 🚀","Amazing effort! 🎯"];
 
 let timer;
-let timeLeft = 240;
-let currentTopic1 = "";
+let timeLeft=240;
+let currentTopic1="";
 
 function updateTimer(){
-  let m = Math.floor(timeLeft/60);
-  let s = timeLeft%60;
-  document.getElementById("timer").textContent = String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-  if(timeLeft<=0){ clearInterval(timer); showEnd(); }
+  let m=Math.floor(timeLeft/60);
+  let s=timeLeft%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+  if(timeLeft<=0){clearInterval(timer);showEnd();}
   else timeLeft--;
 }
 
-function startTimer(){ clearInterval(timer); timeLeft=240; timer=setInterval(updateTimer,1000); }
+function startTimer(){clearInterval(timer);timeLeft=240;timer=setInterval(updateTimer,1000);}
+function startExam(){generateTopic1();startTimer();}
 
 function generateTopic1(){
-  currentTopic1 = topics[Math.floor(Math.random()*topics.length)];
+  currentTopic1=topics[Math.floor(Math.random()*topics.length)];
   document.getElementById("t1").textContent=currentTopic1;
   document.getElementById("t2").textContent="";
 }
 
 function showSecondTopic(){
-  let t = topics.filter(x=>x!==currentTopic1);
-  document.getElementById("t2").textContent = t[Math.floor(Math.random()*t.length)];
+  let t=topics.filter(x=>x!==currentTopic1);
+  document.getElementById("t2").textContent=t[Math.floor(Math.random()*t.length)];
 }
-
-function startExam(){ generateTopic1(); startTimer(); }
 
 function resetExam(){
   clearInterval(timer);
@@ -239,13 +203,12 @@ function resetExam(){
 }
 
 function showEnd(){
-  const msg = messages[Math.floor(Math.random()*messages.length)];
-  document.getElementById("endMessage").textContent = msg;
+  document.getElementById("endMessage").textContent=messages[Math.floor(Math.random()*messages.length)];
   document.getElementById("endScreen").style.display="flex";
   setTimeout(resetExam,30000);
 }
 
-function dismissEnd(){ resetExam(); }
+function dismissEnd(){resetExam();}
 
 updateTimer();
 </script>
