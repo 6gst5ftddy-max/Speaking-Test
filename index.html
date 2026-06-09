@@ -6,105 +6,86 @@
 <title>Speaking Exam App</title>
 
 <style>
-:root{
-  --bg1:#f0fff4;
-  --bg2:#d8f5e1;
-  --bg3:#bfe8cc;
-  --card:rgba(255,255,255,0.78);
-  --stroke:rgba(0,0,0,0.08);
-  --green:#34c759;
-}
-
 body {
   margin: 0;
   padding: 22px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial;
+  font-family: Arial, sans-serif;
   min-height: 100vh;
-  overflow-x: hidden;
-  background: linear-gradient(180deg, #e9fff0 0%, #c9f2d6 45%, #7fd39a 100%);
-  color: #1c1c1e;
+  background: #dff5e6;
+  color: #000;
 }
 
-.orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(28px);
-  opacity: 0.28;
-  animation: float 10s ease-in-out infinite;
-  z-index: 0;
-}
-
-.orb1 { width: 240px; height: 240px; background: #34c759; top: -60px; left: -70px; }
-.orb2 { width: 200px; height: 200px; background: #34c759; bottom: -80px; right: -60px; animation-delay: 2s; }
-.orb3 { width: 180px; height: 180px; background: #34c759; top: 35%; left: 65%; animation-delay: 4s; }
-
-@keyframes float {
-  0%,100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(18px) scale(1.06); }
-}
-
+/* HEADER */
 .headerBox {
-  position: relative;
-  z-index: 2;
-  background: var(--card);
-  backdrop-filter: blur(18px);
-  border: 1px solid var(--stroke);
-  border-radius: 26px;
+  background: white;
+  border: 2px solid black;
+  border-radius: 22px;
   padding: 18px;
-  margin-bottom: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .timer {
   text-align: center;
   font-size: 2.6rem;
-  font-weight: 600;
-  color: #1c7c3a;
+  font-weight: bold;
+  color: #000;
 }
 
+/* CARDS */
 .card {
-  position: relative;
-  z-index: 2;
-  background: var(--card);
-  backdrop-filter: blur(18px);
-  border: 1px solid var(--stroke);
-  border-radius: 26px;
+  background: #f2f2f2;
+  border: 2px solid black;
+  border-radius: 22px;
   padding: 22px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   font-size: 1.2rem;
   line-height: 1.6;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
+/* TOPIC FIELD */
 .topic {
   display: inline-block;
   margin-top: 10px;
-  padding: 6px 14px;
-  border-radius: 14px;
-  background: rgba(52,199,89,0.18);
-  font-weight: 600;
-  color: #1c7c3a;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #999;
+  font-weight: bold;
+  color: black;
 }
 
+/* BUTTONS */
 button {
   width: 100%;
-  padding: 15px;
-  font-size: 16px;
+  padding: 16px;
+  font-size: 20px;
   border-radius: 18px;
-  border: 1px solid rgba(0,0,0,0.1);
-  background: rgba(52,199,89,0.92);
+  border: 2px solid black;
+  background: #63c66d;
   color: white;
-  font-weight: 600;
+  font-weight: bold;
   margin-top: 10px;
-  margin-bottom: 14px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+button:hover {
+  background: #58b962;
 }
 
 button.secondary {
-  background: rgba(255,255,255,0.25);
-  color: #1c1c1e;
+  background: #cfcfcf;
+  color: black;
 }
 
+button.secondary:hover {
+  background: #bdbdbd;
+}
+
+/* END SCREEN */
 .endScreen {
   position: fixed;
   inset: 0;
@@ -112,32 +93,32 @@ button.secondary {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(22px);
+  background: rgba(255,255,255,0.92);
   z-index: 9999;
 }
 
 .endMessage {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #1c7c3a;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2f8f3a;
+  text-align: center;
+  padding: 30px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
-
 <div class="headerBox">
-  <h1 style="text-align:center;margin:0;font-weight:700;">
-    SPEAKING TEST <span style="color:#8e8e93;">PART 1</span>
+  <h1 style="text-align:center;margin:0;font-weight:700;font-size:2rem;">
+    SPEAKING TEST&nbsp;&nbsp;&nbsp;
+    <span style="color:#8e8e93;">PART 1</span>
   </h1>
+
   <div style="text-align:center;font-weight:600;margin-top:4px;">
     General conversation
   </div>
+
   <div class="timer" id="timer">04:00</div>
 </div>
 
@@ -164,52 +145,89 @@ Talk about
 </div>
 
 <script>
-const topics=["your dream job","your dream vacation","your hobbies and free time","social media","your plans for the future","role models","school life","something you are grateful for","your family and friends","a perfect weekend","special days","a healthy lifestyle","sports","your daily chores","your daily habits","food","famous people","films and series","places you have visited","a childhood memory"];
+const topics = [
+"your dream job","your dream vacation","your hobbies and free time","social media",
+"your plans for the future","role models","school life","something you are grateful for",
+"your family and friends","a perfect weekend","special days","a healthy lifestyle",
+"sports","your daily chores","your daily habits","food","famous people",
+"films and series","places you have visited","a childhood memory"
+];
 
-const messages=["Good Job! 👏","Well done! 🌟","Excellent speaking! 💬","Brilliant work! 🚀","Amazing effort! 🎯"];
+const messages = [
+"Good Job! 👏",
+"Well done! 🌟",
+"Excellent speaking! 💬",
+"Brilliant work! 🚀",
+"Amazing effort! 🎯"
+];
 
 let timer;
-let timeLeft=240;
-let currentTopic1="";
+let timeLeft = 240;
+let currentTopic1 = "";
+let lastMessage = "";
 
 function updateTimer(){
-  let m=Math.floor(timeLeft/60);
-  let s=timeLeft%60;
-  document.getElementById("timer").textContent=String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-  if(timeLeft<=0){clearInterval(timer);showEnd();}
-  else timeLeft--;
+  let m = Math.floor(timeLeft / 60);
+  let s = timeLeft % 60;
+  document.getElementById("timer").textContent =
+    String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+
+  if(timeLeft <= 0){
+    clearInterval(timer);
+    showEnd();
+  } else {
+    timeLeft--;
+  }
 }
 
-function startTimer(){clearInterval(timer);timeLeft=240;timer=setInterval(updateTimer,1000);}
-function startExam(){generateTopic1();startTimer();}
+function startTimer(){
+  clearInterval(timer);
+  timeLeft = 240;
+  timer = setInterval(updateTimer, 1000);
+}
+
+function startExam(){
+  generateTopic1();
+  startTimer();
+}
 
 function generateTopic1(){
-  currentTopic1=topics[Math.floor(Math.random()*topics.length)];
-  document.getElementById("t1").textContent=currentTopic1;
-  document.getElementById("t2").textContent="";
+  currentTopic1 = topics[Math.floor(Math.random() * topics.length)];
+  document.getElementById("t1").textContent = currentTopic1;
+  document.getElementById("t2").textContent = "";
 }
 
 function showSecondTopic(){
-  let t=topics.filter(x=>x!==currentTopic1);
-  document.getElementById("t2").textContent=t[Math.floor(Math.random()*t.length)];
+  let t = topics.filter(x => x !== currentTopic1);
+  document.getElementById("t2").textContent =
+    t[Math.floor(Math.random() * t.length)];
 }
 
 function resetExam(){
   clearInterval(timer);
-  timeLeft=240;
-  document.getElementById("timer").textContent="04:00";
-  document.getElementById("t1").textContent="";
-  document.getElementById("t2").textContent="";
-  document.getElementById("endScreen").style.display="none";
+  timeLeft = 240;
+  document.getElementById("timer").textContent = "04:00";
+  document.getElementById("t1").textContent = "";
+  document.getElementById("t2").textContent = "";
+  document.getElementById("endScreen").style.display = "none";
 }
 
 function showEnd(){
-  document.getElementById("endMessage").textContent=messages[Math.floor(Math.random()*messages.length)];
-  document.getElementById("endScreen").style.display="flex";
-  setTimeout(resetExam,30000);
+  let msg;
+  do {
+    msg = messages[Math.floor(Math.random() * messages.length)];
+  } while(msg === lastMessage && messages.length > 1);
+
+  lastMessage = msg;
+  document.getElementById("endMessage").textContent = msg;
+  document.getElementById("endScreen").style.display = "flex";
+
+  setTimeout(resetExam, 30000);
 }
 
-function dismissEnd(){resetExam();}
+function dismissEnd(){
+  resetExam();
+}
 
 updateTimer();
 </script>
